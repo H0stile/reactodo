@@ -1,0 +1,7 @@
+// init project
+
+firebase init
+
+// deploy project
+
+firebase deploy
