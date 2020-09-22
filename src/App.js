@@ -1,24 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
 function App() {
+  const [todos, setTodos] = useState([]); // useState = hook, initialised with empty array - used to get a short term memory of the todos
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Hello World!</h1>
+      <input />
+      <button>Add ToDo</button>
+
+      <ul>
+        <li>Apply to front end job offers</li>
+        <li>Like posts on Linkedin</li>
+        <li>Learn React</li>
+        <li>Get some projects done</li>
+      </ul>
     </div>
   );
 }
