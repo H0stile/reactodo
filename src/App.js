@@ -9,13 +9,30 @@ function App() {
     "Get some projects done",
     "Go to the gym every two days",
   ]); // useState = hook, initialised with empty array - used to get a short term memory of the todos
+
   const [input, setInput] = useState([""]);
-  console.log(input);
+
+  //console.log(input);
+
+  const addTodo = (event) => {
+    event.preventDefault();
+    console.log("its working");
+    setTodos([...todos, input]);
+    setInput(""); // Reinitialise the input field to blank
+  };
+
   return (
     <div className="App">
       <h1>Reactodo</h1>
-      <input value={input} onChange={(event) => setInput(event.target.value)} />
-      <button>Add ToDo</button>
+      <form action="">
+        <input
+          value={input}
+          onChange={(event) => setInput(event.target.value)}
+        />
+        <button type="submit" onClick={addTodo}>
+          Add ToDo
+        </button>
+      </form>
 
       <ul>
         {todos.map((todo) => (
