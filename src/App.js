@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Button } from "@material-ui/core";
+import { Button, FormControl, Input, InputLabel } from "@material-ui/core";
+
 import "./App.css";
 
 function App() {
@@ -25,19 +26,26 @@ function App() {
   return (
     <div className="App">
       <h1>Reactodo</h1>
+
       <form action="">
-        <input
-          value={input}
-          onChange={(event) => setInput(event.target.value)}
-        />
+        <FormControl>
+          <InputLabel>Add a task</InputLabel>
+          <Input
+            value={input}
+            onChange={(event) => setInput(event.target.value)}
+          />
+        </FormControl>
+
         <Button
           variant="contained"
           color="primary"
+          disabled={!input}
           type="submit"
           onClick={addTodo}
         >
           Add ToDo
         </Button>
+        {/* disabled when no input value */}
       </form>
 
       <ul>
