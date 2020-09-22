@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Button } from "@material-ui/core";
 import "./App.css";
 
 function App() {
@@ -29,9 +30,14 @@ function App() {
           value={input}
           onChange={(event) => setInput(event.target.value)}
         />
-        <button type="submit" onClick={addTodo}>
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          onClick={addTodo}
+        >
           Add ToDo
-        </button>
+        </Button>
       </form>
 
       <ul>
