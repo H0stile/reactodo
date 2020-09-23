@@ -4,4 +4,6 @@ firebase init
 
 // deploy project
 
+npm run build
+
 firebase deploy
