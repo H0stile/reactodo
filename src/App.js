@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Button, FormControl, Input, InputLabel } from "@material-ui/core";
 import Todo from "./Todo";
 import db from "./firebase";
+import firebase from "firebase";
 import "./App.css";
 
 function App() {
-  const [todos, setTodos] = useState([""]); // useState = hook, initialised with empty array - used to get a short term memory of the todos
+  const [todos, setTodos] = useState([]); // useState = hook, initialised with empty array - used to get a short term memory of the todos
 
   const [input, setInput] = useState([""]);
 
@@ -15,15 +16,21 @@ function App() {
 
   useEffect(() => {
     // Will fire everytime the page is loaded
-    db.collection("todos").onSnapshot((snapshot) => {
-      // console.log(snapshot.docs.map((doc) => doc.data()));
-      setTodos(snapshot.docs.map((doc) => doc.data().todo));
-    });
+    db.collection("todos")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) => {
+        // console.log(snapshot.docs.map((doc) => doc.data()));
+        setTodos(snapshot.docs.map((doc) => doc.data().todo));
+      });
   }, []);
 
   const addTodo = (event) => {
     event.preventDefault();
-    console.log("its working");
+    //  console.log("its working");
+    db.collection("todos").add({
+      todo: input,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    });
     setTodos([...todos, input]);
     setInput(""); // Reinitialise the input field to blank
   };
