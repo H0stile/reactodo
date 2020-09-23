@@ -1,21 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, FormControl, Input, InputLabel } from "@material-ui/core";
 import Todo from "./Todo";
-
+import db from "./firebase";
 import "./App.css";
 
 function App() {
-  const [todos, setTodos] = useState([
-    "Apply to front end job offers",
-    "Like posts on Linkedin",
-    "Learn React",
-    "Get some projects done",
-    "Go to the gym every two days",
-  ]); // useState = hook, initialised with empty array - used to get a short term memory of the todos
+  const [todos, setTodos] = useState([""]); // useState = hook, initialised with empty array - used to get a short term memory of the todos
 
   const [input, setInput] = useState([""]);
 
   //console.log(input);
+
+  // Listen to the db and fetch the tasks
+
+  useEffect(() => {
+    // Will fire everytime the page is loaded
+    db.collection("todos").onSnapshot((snapshot) => {
+      // console.log(snapshot.docs.map((doc) => doc.data()));
+      setTodos(snapshot.docs.map((doc) => doc.data().todo));
+    });
+  }, []);
 
   const addTodo = (event) => {
     event.preventDefault();
